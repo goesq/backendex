@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
- 
+require('dotenv').config() // Carrega as variaveis do arquivo venv
 // Inicialização do app
 const app = express();
 app.use(cors());
@@ -17,7 +17,11 @@ mongoose.connect('mongodb+srv://victorgoes145:ionpey9hnAW9zypW@library.0gg7l.mon
  
 // Importação das rotas
 const booksRoutes = require('./routes/bookRoutes');
+const authRoutes = require('./routes/authRoutes')
+app.use('/api/auth', authRoutes)
 app.use('/api/books', booksRoutes)
+
+
  
 // Definir a porta do servidor
 app.listen(3000, () => {
